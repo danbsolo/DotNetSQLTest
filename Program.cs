@@ -105,4 +105,5 @@ public class Person
 }
 
 //"AZURE_SQL_CONNECTIONSTRING": "Server=tcp:sandbox-db-server2.database.windows.net,1433;Initial Catalog=mySampleDatabase;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";"
+//"AZURE_SQL_CONNECTIONSTRING": "Server=tcp:sandbox-db-server2.database.windows.net,1433;Initial Catalog=mySampleDatabase;User ID=testuser;Password=StrongPassword123!;Encrypt=True;TrustServerCertificate=False;Authentication=SqlPassword;"
 
