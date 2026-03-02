@@ -108,7 +108,10 @@ app.MapGet("/userInfo", (HttpContext context) =>
 //
 app.MapGet("/debug", (HttpContext ctx) =>
 {
-    return Results.Json(ctx.User.Claims.Select(c => new { c.Type, c.Value }));
+    var headers = ctx.Request.Headers
+        .Select(h => new { h.Key, Value = h.Value.ToString() });
+
+    return Results.Json(headers);
 });
 //
 
