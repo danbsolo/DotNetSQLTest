@@ -103,7 +103,8 @@ app.MapGet("/userInfo", (HttpContext context) =>
     };
 
     return Results.Json(response);
-}).RequireAuthorization();
+})
+//.RequireAuthorization();
 //
 
 
