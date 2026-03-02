@@ -5,17 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//
-builder.Services.AddAuthentication();
-builder.Services.AddAuthorization();
-//
-
 var app = builder.Build();
-
-//
-app.UseAuthentication();
-app.UseAuthorization();
-//
 
 // For production scenarios, consider keeping Swagger configurations behind the environment check
 // if (app.Environment.IsDevelopment())
@@ -24,7 +14,7 @@ app.UseAuthorization();
     app.UseSwaggerUI();
 // }
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 string connectionString = app.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")!;
 
@@ -84,39 +74,7 @@ app.MapPost("/Person", (Person person) => {
 .WithName("CreatePerson")
 .WithOpenApi();
 
-//
-app.MapGet("/userInfo", (HttpContext context) =>
-{
-    var user = context.User;
-
-    if (!user.Identity?.IsAuthenticated ?? true)
-        return Results.Unauthorized();
-
-    var response = new
-    {
-        Name = user.Identity.Name,
-        Claims = user.Claims.Select(c => new
-        {
-            Type = c.Type,
-            Value = c.Value
-        })
-    };
-
-    return Results.Json(response);
-});
-//.RequireAuthorization();
-//
-app.MapGet("/debug", (HttpContext ctx) =>
-{
-    var headers = ctx.Request.Headers
-        .Select(h => new { h.Key, Value = h.Value.ToString() });
-
-    return Results.Json(headers);
-});
-//
-
-
-app.MapGet("/", () => "Hello World! Go to /swagger or /userInfo");
+app.MapGet("/", () => "Hello World! Go to /swagger");
 
 app.Run();
 
