@@ -106,6 +106,11 @@ app.MapGet("/userInfo", (HttpContext context) =>
 });
 //.RequireAuthorization();
 //
+app.MapGet("/debug", (HttpContext ctx) =>
+{
+    return Results.Json(ctx.User.Claims.Select(c => new { c.Type, c.Value }));
+});
+//
 
 
 app.MapGet("/", () => "Hello World! Go to /swagger or /userInfo");
