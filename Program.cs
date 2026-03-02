@@ -74,8 +74,27 @@ app.MapPost("/Person", (Person person) => {
 .WithName("CreatePerson")
 .WithOpenApi();
 
-app.MapGet("/", () => "Hello World! Go to /swagger");
+app.MapGet("/userInfo", (HttpContext context) =>
+{
+    var user = context.User;
 
+    if (!user.Identity?.IsAuthenticated ?? true)
+        return Results.Unauthorized();
+
+    var response = new
+    {
+        Name = user.Identity.Name,
+        Claims = user.Claims.Select(c => new
+        {
+            Type = c.Type,
+            Value = c.Value
+        })
+    };
+
+    return Results.Json(response);
+}).RequireAuthorization();
+
+app.MapGet("/", () => "Hello World! Go to /swagger or /userInfo");
 
 app.Run();
 
