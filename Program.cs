@@ -6,7 +6,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //
-builder.Services.AddAuthentication()
+builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
 //
 
