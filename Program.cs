@@ -131,9 +131,6 @@ app.MapGet("/whoami", (HttpContext ctx) =>
 });
 //
 
-
-app.MapGet("/", () => "Hello World! Go to /swagger or /userInfo");
-
 app.MapGet("/", () => "Hello World! Go to /swagger");
 
 app.Run();
